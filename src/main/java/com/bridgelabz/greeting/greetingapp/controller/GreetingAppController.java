@@ -40,7 +40,12 @@ public class GreetingAppController {
     }
 
     @PostMapping(value = "/greeting/message/update/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity greetingMessageWithName(@RequestBody Greeting greeting, @PathVariable("id") int id) {
+    public ResponseEntity updateGreetingMessage(@RequestBody Greeting greeting, @PathVariable("id") int id) {
         return new ResponseEntity(greetingAppService.updateGreetingMessage(greeting, id), HttpStatus.OK);
+    }
+
+    @DeleteMapping(value = "/greeting/message/delete/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public void deleteGreetingMessage(@PathVariable("id") int id) {
+        greetingAppService.deleteGreetingMessage(id);
     }
 }

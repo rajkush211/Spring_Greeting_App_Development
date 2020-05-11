@@ -3,7 +3,6 @@ package com.bridgelabz.greeting.greetingapp.service;
 import com.bridgelabz.greeting.greetingapp.model.Greeting;
 import com.bridgelabz.greeting.greetingapp.repository.GreetingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,8 +11,6 @@ import java.util.Optional;
 @Service
 public class GreetingAppService {
 
-    @Autowired
-    MongoOperations mongoOperations;
     @Autowired
     private GreetingRepository greetingRepository;
 
@@ -41,5 +38,9 @@ public class GreetingAppService {
         greetingObject.get().setMessage(greeting.getMessage());
         greetingRepository.save(greetingObject.get());
         return greetingObject;
+    }
+
+    public void deleteGreetingMessage(int id) {
+        greetingRepository.deleteById(id);
     }
 }
