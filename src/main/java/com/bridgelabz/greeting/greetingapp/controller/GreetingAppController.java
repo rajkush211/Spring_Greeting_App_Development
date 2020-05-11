@@ -35,4 +35,9 @@ public class GreetingAppController {
     public ResponseEntity greetingMessageWithName(@PathVariable("id") int id) {
         return new ResponseEntity(greetingAppService.findGreetingMessage(id), HttpStatus.OK);
     }
+
+    @GetMapping(value = "/greeting/message/list", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity listAllGreetingMessages() {
+        return new ResponseEntity(greetingAppService.listAllGreetingMessage(), HttpStatus.OK);
+    }
 }
