@@ -1,14 +1,12 @@
 package com.bridgelabz.greeting.greetingapp.controller;
 
+import com.bridgelabz.greeting.greetingapp.model.Greeting;
 import com.bridgelabz.greeting.greetingapp.service.GreetingAppService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class GreetingAppController {
@@ -39,5 +37,10 @@ public class GreetingAppController {
     @GetMapping(value = "/greeting/message/list", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity listAllGreetingMessages() {
         return new ResponseEntity(greetingAppService.listAllGreetingMessage(), HttpStatus.OK);
+    }
+
+    @PostMapping(value = "/greeting/message/update/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity greetingMessageWithName(@RequestBody Greeting greeting, @PathVariable("id") int id) {
+        return new ResponseEntity(greetingAppService.updateGreetingMessage(greeting, id), HttpStatus.OK);
     }
 }
